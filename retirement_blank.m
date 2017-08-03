@@ -1,16 +1,15 @@
-clr;
+clear all; close all; clc;
 
 % all in pre-tax dollars
 
 %% inputs
 
-% retirement_age = 50;
 RoR = 0.05; % rate of return minus inflation
 retirement_RoR = 0.02; % rate of return of your retirement funds during retirement
 retirement_income = 100000; % desired yearly income during retirement
 side_income_after_retirement = 0; %after retirement, only until ss kicks in
 
-% firm inputs
+% inputs
 current_age = 30;
 lifespan = 95;
 ss_age = 67;
