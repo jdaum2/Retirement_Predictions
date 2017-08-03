@@ -5,7 +5,7 @@ clr;
 %% inputs
 
 % retirement_age = 50;
-RoR = 0.03; % rate of return minus inflation
+RoR = 0.05; % rate of return minus inflation
 retirement_RoR = 0.02; % rate of return of your retirement funds during retirement
 retirement_income = 100000; % desired yearly income during retirement
 side_income_after_retirement = 0; %after retirement, only until ss kicks in
@@ -105,13 +105,17 @@ for retirement_age = [current_age:1:lifespan];
     
     successful_retirement(retirement_age) = ira(lifespan) >0 | tsp(lifespan) > 0;
     
+    if(successful_retirement(retirement_age))
+        break
+    end
+    
 end
 niceplot(life,tsp(current_age:end)./1000000,'Age','Assets (M)','TSP Assets','h',1,'s','b');
 niceplot(life,ira(current_age:end)./1000000,'Age','Assets (M)','TSP Assets','h',1,'s','k');
 niceplot(life,withdrawl(current_age:end)./1000000,'Age','Assets (M)','TSP Assets','h',1,'s','r');
-niceplot([retirement_age retirement_age],[0 2],'Age','Assets (M)','Retirement Projection','h',1,'s','r--');
+niceplot([retirement_age retirement_age],[0 2],'Age','Assets (M)',{'Retirement Projection' 'Successful at Age ' num2str(retirement_age)},'h',1,'s','r--');
 legend({'TSP Assets','IRA Assets','Withdrawl from Accounts','Retirement'})
-niceplot([1:1:lifespan],successful_retirement,'Age at Retirement','Did you have money then?','When Can I Retire?');
+% niceplot([1:1:lifespan],successful_retirement,'Age at Retirement','Did you have money then?','When Can I Retire?');
 successful_retirement_age=find(successful_retirement==1,1,'first')
 
 
